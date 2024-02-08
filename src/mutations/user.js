@@ -2,6 +2,8 @@ import api from '../lib/client'
 import {toast} from '../lib/util';
 import { storeUserAuthErrorMessages, storeUserProfile, storeUserBalance } from '../actions/user';
 import { store } from '../../store';
+import { getAirtimeProvider, getDiscos } from './bills';
+
 import { headerConfig, getUserHeaderConfig} from '../lib/util';
 
 export const registerUser = async (userData) => {
@@ -15,7 +17,9 @@ export const registerUser = async (userData) => {
 
 export const loginUser = async (credentials) => {
   try {
-    const response = await api.post('/users/token', credentials); 
+    const response = await api.post('/users/token', credentials);
+    getDiscos();
+    getAirtimeProvider();
     return response.data;
   } catch (error) {
     store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
@@ -107,3 +111,5 @@ export function BiometricLogin(user) {
       });
   };
 }
+
+

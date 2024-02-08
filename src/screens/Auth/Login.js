@@ -10,7 +10,7 @@ import { loginUser } from '../../mutations/user';
 import {styles} from './styles';
 import { handleLoginSuccess } from '../../actions/user';
 import { storeUserAuthErrorMessages } from '../../actions/user';
-import { ContactIcon } from '../../../assets/icons';
+
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();

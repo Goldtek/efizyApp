@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, ActivityIndicator} from 'react-native';
 import {View, Colors} from 'react-native-ui-lib';
+import { useMutation } from 'react-query';
 import {
   BackHeader,
   Input,
@@ -11,47 +12,40 @@ import {
   nairaFormat,
   getBundleBasedOnProvider,
 } from '../../../common';
+
+import { getPlans, buyData } from '../../../mutations/bills';
 import {useSelector} from 'react-redux';
 import {styles} from '../styles';
-const data = [];
 
-const DataView = ({onContinue}) => {
-  // const {airtime, data, beneficiaries} = useSelector(state => state.bill);
-  const airtime = {};
+const DataView = ({navigation, route}) => {
+  const { internetServiceProvider, dataPlans} = useSelector(state => state.bill);
   const beneficiaries = {};
-  const [selectedNetwork, setSelectedNetwork] = useState();
-  const [dataPlans, setDataPlans] = useState();
+  const [selectedNetwork, setSelectedNetwork] = useState({});
   const [selectedPlan, setSelectedPlan] = useState();
   const [phone, setPhone] = useState('');
   const [amount, setAmount] = useState('');
   const [discount, setDiscount] = useState('');
   const [voucherAmount, setVoucherAmount] = useState(0);
 
-  // useEffect(() => {
-  //   dispatch(getAllMobileData());
-  //   getBeneficiaries('mobile-data-bill-payment');
-  // }, [dispatch]);
-
-  useEffect(() => {
-    if (selectedNetwork) {
-      const filteredData = getBundleBasedOnProvider(data, selectedNetwork);
-      setDataPlans(filteredData);
-    }
-    return () => {
-      setDataPlans([]);
-    };
-  }, [selectedNetwork, data]);
+  const subscribe = useMutation(buyData, {
+    onSuccess: () => {
+      navigation.navigate('success', {title: `Purchase of data bundle is successful`, type: 'login', buttonLabel: 'Dashboard'});
+    },
+  });
 
   const handleContinue = () => {
     const payload = {
-      phone,
-      amount: (Number(selectedPlan?.amount) - voucherAmount).toString(),
-      network: selectedNetwork,
-      voucher: discount,
-      title: 'Internet Subscription',
+      phoneNumber: phone,
+      dataCode: selectedPlan.id,
+      dataProviderName: selectedPlan.operator
     };
-    onContinue(payload);
+    subscribe.mutate(payload);
   };
+
+  const handleSelectNetwork = (selectedNetwk) => {
+    setSelectedNetwork(selectedNetwk)
+    getPlans(selectedNetwk.id);
+  }
 
   return (
     <View flex paddingT-60 paddingH-24 backgroundColor="#fff">
@@ -62,10 +56,11 @@ const DataView = ({onContinue}) => {
           <BackHeader title="Data Subscription" />
         </View>
         <NetworkSelector
-          data={airtime}
+          data={internetServiceProvider}
           selected={selectedNetwork}
-          onSelect={setSelectedNetwork}
+          onSelect={handleSelectNetwork}
         />
+ 
         <BeneficiaryInput
           label="Phone number"
           placeholder="Enter phone number"
@@ -74,13 +69,14 @@ const DataView = ({onContinue}) => {
           onChange={setPhone}
           onSelect={setPhone}
         />
+
         <View marginT-10>
           <SelectData
             label="Plan Provider"
-            placeholder="Select plan"
+            placeholder="Select data plan"
             selected={selectedPlan}
             data={dataPlans}
-            key="short_name"
+            key="id"
             onSelect={setSelectedPlan}
           />
         </View>
@@ -89,7 +85,7 @@ const DataView = ({onContinue}) => {
           <Input
             testID="amount-input"
             label="Amount"
-            placeholder={nairaFormat(selectedPlan?.amount)}
+            placeholder={nairaFormat(selectedPlan?.meta.fee)}
             value={amount}
             onChange={setAmount}
             disabled
@@ -101,7 +97,9 @@ const DataView = ({onContinue}) => {
           disabled={!selectedNetwork || !selectedPlan || !phone}
           bgColor={Colors.blue700}
           color={Colors.white}
+          isLoading={subscribe.isLoading}
           onPress={handleContinue}
+          loaderSize={'small'}
         />
       </ScrollView>
     </View>

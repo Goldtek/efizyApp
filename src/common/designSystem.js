@@ -48,6 +48,8 @@ export const loadConfigurations = () => {
     mtn: require('../../assets/images/networks/mtn.png'),
     glo: require('../../assets/images/networks/glo.png'),
     airtel: require('../../assets/images/networks/airtel.png'),
+    visafone: require('../../assets/images/networks/visafone.png'),
+    smile: require('../../assets/images/networks/smile.png'),
     '9mobile': require('../../assets/images/networks/9mobile.png'),
   });
 

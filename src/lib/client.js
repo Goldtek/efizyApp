@@ -12,7 +12,6 @@ const device = Platform.OS === 'android' ? 'ANDROID' : 'IOS';
 const baseURL = 'https://efizypayapi.azurewebsites.net/v1'; 
 let coordinates = '';
 const userData = getLoggedInUserFromReducer();
-
 const config = {
   baseURL: baseURL,
   timeout: 60000,
@@ -23,7 +22,7 @@ const config = {
     'Build-Number': DeviceInfo.getBuildNumber(),
     'Device-Description': DeviceInfo.getSystemVersion(),
     'Device-Country': RNLocalize.getCountry(),
-    Authorization: `Bearer ${userData.token}`,
+  //  Authorization: `Bearer ${userData.token}`,
     // 'App-Version': getCodePushVersion(),
   },
   withCredentials: true,
@@ -129,7 +128,6 @@ GetLocation.getCurrentPosition({
             debugConsole.log(error.message);
           });
       } else if (Platform.OS === 'ios') {
-      
         coordinates = {
           latitude: 0.0,
           longitude: 0.0,

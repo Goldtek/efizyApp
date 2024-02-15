@@ -137,10 +137,11 @@ const Dashboard = ({navigation}) => {
               title={'Electricity'}
               onPress={() => navigation.navigate('electricity')}
             />
+
             <Service
-              imageName="internet"
-              title={'Internet'}
-              onPress={() => navigation.navigate('internet')}
+              imageName="data"
+              title={'Data Bundle'}
+              onPress={() => navigation.navigate('data')}
             />
             <Service
               imageName="cabletv"
@@ -149,10 +150,10 @@ const Dashboard = ({navigation}) => {
             />
           </View>
           <View row spread marginT-30>
-            <Service
-              imageName="data"
-              title={'Data Bundle'}
-              onPress={() => navigation.navigate('data')}
+          <Service
+              imageName="giftcard"
+              title={'Gift Cards'}
+              onPress={() => navigation.navigate('giftcard')}
             />
             <Service imageName="a2c" title={'Airtime To Cash'} />
             <Service
@@ -162,13 +163,9 @@ const Dashboard = ({navigation}) => {
             />
           </View>
           <View row spread marginT-30>
-            <Service
-              imageName="giftcard"
-              title={'Gift Cards'}
-              onPress={() => navigation.navigate('giftcard')}
-            />
             <Service imageName="flight" title={'Book  Flight'} />
             <Service imageName="hotel" title={'Book   Hotel'} />
+            <Service />
           </View>
         </View>
       </ScrollView>

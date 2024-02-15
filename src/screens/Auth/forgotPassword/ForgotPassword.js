@@ -1,18 +1,28 @@
 import React, {useState} from 'react';
 import {View, Colors, Text} from 'react-native-ui-lib';
 import {TouchableOpacity, SafeAreaView} from 'react-native';
+import { useMutation } from 'react-query';
+
 import {Button, Input} from '../../../common';
 import {BackArrow} from '../../../../assets/icons';
+import { sendPasswordReqOTP } from '../../../mutations/user';
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState('');
+  const [isSent, setSent] = useState(false);
+
+  const handResetSuccess = () => {
+    setSent(true);
+    navigation.navigate('verify_email', {email})
+  };
+
+  const forgotMutation = useMutation(sendPasswordReqOTP, {
+    onSuccess: handResetSuccess,
+  });
+ 
 
   const handleReset = () => {
-    navigation.navigate('verify_email', {email})
-    // navigation.navigate('success', {
-    //   message: 'Congratulations, you have successfully changed your password',
-    //   buttonLabel: 'Back to Log In',
-    // });
+   forgotMutation.mutate(email);
   };
 
   return (
@@ -48,7 +58,7 @@ const ForgotPassword = ({navigation}) => {
       <Button
         testID="forgot-btn"
         title="Reset Password"
-        disabled={!email}
+        disabled={!email || isSent}
         onPress={handleReset}
       />
     </View>

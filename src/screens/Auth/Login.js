@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import {StatusBar} from 'react-native';
 
-import {Button, RegularText, Input, TitleInput} from '../../common';
+import {Button, RegularText, TitleInput} from '../../common';
 import { useMergedState } from '../../lib/util';
 import { loginUser } from '../../mutations/user';
 import {styles} from './styles';
@@ -18,14 +18,21 @@ const Login = ({navigation}) => {
   let [passwordIcon, setPasswordIcon] = React.useState('eye-off-outline');
 
   const [state, setState] = useMergedState({
-    username: '',
     password: '',
+    email: '',
     newDeviceToken: null
   });
 
   const errorMessage = useSelector(
     store => store.user?.errorMessage,
   );
+
+  // new device login (change of device)
+  useEffect(()=>{
+    if(errorMessage === 'unrecognised device. token sent to email'){
+      navigation.navigate('register_device',{email:state.email, password: state.password})
+    }
+  },[errorMessage])
   
 
   const loginMutation = useMutation(loginUser, {
@@ -35,6 +42,8 @@ const Login = ({navigation}) => {
   const handleLogin = () => {
     loginMutation.mutate(state);
   };
+
+  
 
   const togglePasswordView = () => {
     setSecurePassword(!securePassword);

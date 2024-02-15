@@ -1,75 +1,36 @@
 import React from 'react';
-import {StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {StyleSheet, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import {Colors, Image, Text, View} from 'react-native-ui-lib';
 import {moneyFormat, ms} from './utils';
 import {RegularText} from './Text';
 
-export const NetworkSelector = ({selected, onSelect}) => {
+export const NetworkSelector = ({selected, onSelect, data}) => {
   return (
     <View>
       <RegularText text="Select network provider" marginB-16 size={16} />
-      <View row spread marginB-24>
-        <TouchableOpacity onPress={() => onSelect('mtn')}>
-          <View
-            center
-            style={[
-              styles.network,
-              selected === 'mtn' && styles.selectedNetwork,
-            ]}>
-            <Image
-              assetName="mtn"
-              assetGroup="networks"
-              style={styles.networkImage}
-            />
-            <RegularText text="MTN" size={14} />
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+
+          <View row spread marginB-24 marginR-20 >
+          {data.map((item, index) => (
+            <TouchableOpacity onPress={() => onSelect(item)}>
+              <View
+                center
+                style={[
+                  styles.network,
+                   selected.name === item.name && styles.selectedNetwork,
+                ]}>
+                <Image
+                  assetName={item.name.toLowerCase()}
+                  assetGroup="networks"
+                  style={styles.networkImage}
+                />
+                <RegularText text={item.name.toUpperCase()} size={14} />
+              </View>
+            </TouchableOpacity>
+          ))}
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onSelect('9mobile')}>
-          <View
-            center
-            style={[
-              styles.network,
-              selected === '9mobile' && styles.selectedNetwork,
-            ]}>
-            <Image
-              assetName="9mobile"
-              assetGroup="networks"
-              style={styles.networkImage}
-            />
-            <RegularText text="9mobile" size={14} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onSelect('airtel')}>
-          <View
-            center
-            style={[
-              styles.network,
-              selected === 'airtel' && styles.selectedNetwork,
-            ]}>
-            <Image
-              assetName="airtel"
-              assetGroup="networks"
-              style={styles.networkImage}
-            />
-            <RegularText text="Airtel" size={14} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onSelect('glo')}>
-          <View
-            center
-            style={[
-              styles.network,
-              selected === 'glo' && styles.selectedNetwork,
-            ]}>
-            <Image
-              assetName="glo"
-              assetGroup="networks"
-              style={styles.networkImage}
-            />
-            <RegularText text="Glo" size={14} />
-          </View>
-        </TouchableOpacity>
-      </View>
+       
+      </ScrollView>
     </View>
   );
 };
@@ -138,7 +99,7 @@ const styles = StyleSheet.create({
   },
   amount: {
     paddingHorizontal: ms(21),
-    paddingVertical: ms(9),
+    paddingVertical: ms(11),
     borderColor: '#EDEDED',
     borderWidth: 1,
     borderRadius: ms(8),

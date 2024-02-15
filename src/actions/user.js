@@ -4,43 +4,47 @@ import { store } from "../../store";
 
 
 export const handleLoginSuccess = (data, variables, navigation) => {
-    store.dispatch(storeSecrets(data));
-    fetchUser(data, navigation);
-    
+    store.dispatch(storeSecrets(data))
+    fetchUser(data, navigation); 
 };
 
 
-export const storeUserAuthErrorMessages = (message) => dispatch => {
-    dispatch({
+export const DeviceLoginSuccess = (data, variables, navigation) => {
+   store.dispatch(storeSecrets(data));
+};
+
+
+export const storeUserAuthErrorMessages = (message)  => {
+    return {
       type: STORE_USER_ERROR_MSG,
       payload: message,
-    });
+    };
 }
 
-export const storeSecrets = (data) => dispatch => {
-  dispatch({
+export const storeSecrets = (data) => {
+  return {
     type: STORE_SECRETS,
     payload: data,
-  });
+  };
 }
 
-export const storeUserProfile = (user) => dispatch => {
-  dispatch({
+export const storeUserProfile = (user) => {
+  return {
     type: FETCH_USER,
     payload: user,
-  });
+  };
 }
 
-export const storeUserBalance = (balance) => dispatch => {
-  dispatch({
+export const storeUserBalance = (balance) => {
+  return {
     type: FETCH_USER_BALANCE,
     payload: balance,
-  });
+  };
 }
 
 
-export const logOut = () => dispatch => {
-  dispatch({
+export const logOut = () => {
+  return{
     type: LOG_OUT,
-  });
+  };
 }

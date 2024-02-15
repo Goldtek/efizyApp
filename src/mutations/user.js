@@ -2,7 +2,7 @@ import api from '../lib/client'
 import {toast} from '../lib/util';
 import { storeUserAuthErrorMessages, storeUserProfile, storeUserBalance } from '../actions/user';
 import { store } from '../../store';
-import { getAirtimeProvider, getDiscos } from './bills';
+import { getAirtimeProvider, getDiscos, getInternetProviders } from './bills';
 
 import { headerConfig, getUserHeaderConfig} from '../lib/util';
 
@@ -18,8 +18,9 @@ export const registerUser = async (userData) => {
 export const loginUser = async (credentials) => {
   try {
     const response = await api.post('/users/token', credentials);
-    getDiscos();
-    getAirtimeProvider();
+    getDiscos(response.data);
+    getAirtimeProvider(response.data);
+    getInternetProviders(response.data);
     return response.data;
   } catch (error) {
     store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
@@ -29,9 +30,7 @@ export const loginUser = async (credentials) => {
 
 export const fetchUser = async (data) => {
   try {
-    accessToken = data.token;
-    accessSecret =  data.secret;
-    const header = headerConfig({accessToken, accessSecret});
+    const header = headerConfig({accessSecret: data.secret, accessToken: data.token});
     const response = await api.get('/users/profile', header); 
     const userId = response.data.id;
     getUserBalance(data, userId);
@@ -39,6 +38,20 @@ export const fetchUser = async (data) => {
   } catch (error) {
     store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
   }
+};
+
+export const refreshTokenService = () => {
+  const accessSecret = store.getState().user.secret;
+  const accessToken = store.getState().user.token;
+  const refreshToken = store.getState().user.refreshToken;
+  const header = getUserHeaderConfig();
+  const data = {
+    token: accessToken,
+    secret: accessSecret,
+    refreshToken,
+  };
+
+  return api.post('/users/refresh-token', data, header);
 };
 
 
@@ -63,7 +76,7 @@ export const sendPasswordReqOTP = async (email) => {
 
 export const verifyOtpRequest = async (data) => {
   try {
-  const response = await api.post('/users/verify-password-reset', { data });
+  const response = await api.post('/users/verify-password-reset', { ...data });
   return response.data;
   } catch (error) {
     toast(error?.response?.data?.message, '', 'error');

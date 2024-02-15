@@ -4,37 +4,35 @@ import {View, Colors, Text} from 'react-native-ui-lib';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { useMutation } from 'react-query';
 
-import { sendPasswordReqOTP } from '../../../mutations/user';
-import {RegularText, useMergedState} from '../../../common';
-import {BackArrow, Paste} from '../../../../assets/icons';
-import {styles} from '../styles';
+import { DeviceLoginSuccess } from '../../actions/user';
+import { loginUser } from '../../mutations/user';
+import {RegularText, useMergedState} from '../../common';
+import {BackArrow} from '../../../assets/icons';
+import {styles} from './styles';
 
-const VerifyEmail = ({navigation, route}) => {
-    const {email} = route.params;
+const RegisterDevice = ({navigation, route}) => {
+   const {email, password} = route.params;
     const [state, setState] = useMergedState({
         otpError: '',
         otp: '',
         processing: false
     });
 
-    const handResendSuccess = () => {
-      // disable somethings
-    };
-
-    // const handResetSuccess = () => {
-    //   navigation.navigate('verify_email', {email})
-    //   setState({processing: false})
-    // }
+    const loginMutation = useMutation(loginUser, {
+      onSuccess: DeviceLoginSuccess
+  });
+ 
   
-    const resendMail = useMutation(sendPasswordReqOTP, {
-      onSuccess: handResendSuccess,
-    });
-
 
  const handleOtp = (otp) => {
   if(otp.length === 6) {
     setState({processing: true});
-    navigation.navigate('change_password', {email, token: otp})
+    const data = {
+      password,
+      email,
+      newDeviceToken: otp
+    }
+    loginMutation.mutate(data);
   }
  };
 
@@ -53,14 +51,14 @@ const VerifyEmail = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
         <Text h1  blue700 bold>
-          Forgot Password
+          New Device Login
         </Text>
       </View>
-      <Text h2 bold marginB-24 testID="forgot-pass">
+      <Text h2 bold marginB-24 testID="">
         Enter OTP
       </Text>
-      <Text body2 marginB-34 testID="forgot-pass">
-        Please enter the verification code sent to your email
+      <Text body2 marginB-34 testID="">
+      Enter Device Token sent to your Email-Address
       </Text>
       <OTPInputView
               style={[styles.otpView]}
@@ -87,17 +85,6 @@ const VerifyEmail = ({navigation, route}) => {
                {state.processing === true && (
                   <ActivityIndicator size={'small'} color={'#FF6600'} />
                 )}
-
-             
-              <TouchableOpacity
-                style={styles.resendCode}
-                 onPress={() => resendMail.mutate(email)}
-              >
-                <Text body2  blue700 bold>
-                    Resend OTP
-                </Text>
-               
-              </TouchableOpacity>
             </View>
     
     </View>
@@ -105,4 +92,4 @@ const VerifyEmail = ({navigation, route}) => {
  );
 };
 
-export default VerifyEmail;
+export default RegisterDevice;

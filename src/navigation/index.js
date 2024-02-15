@@ -5,6 +5,7 @@ import {View, Text, Colors} from 'react-native-ui-lib';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Onboarding from '../screens/Auth/Onboarding';
 import Login from '../screens/Auth/Login';
+import RegisterDevice from '../screens/Auth/registerDevice';
 import Signup from '../screens/Auth/Signup';
 import ForgotPassword from '../screens/Auth/forgotPassword/ForgotPassword';
 import Success from '../screens/Auth/Success';
@@ -16,7 +17,7 @@ import Profile from '../screens/Profile';
 import Dashboard from '../screens/Dashboard';
 import LockScreen from '../screens/Auth/Lockscreen';
 import Support from '../screens/Profile/support';
-
+import ChangePassword from '../screens/Auth/forgotPassword/changePassword';
 import Giftcard from '../screens/Giftcard';
 import BuyGiftCard from '../screens/Giftcard/BuyGiftcard';
 import SellGiftCard from '../screens/Giftcard/SellGiftCard';
@@ -97,6 +98,25 @@ export const PublicNavigator = () => (
   <Stack.Screen
     name='verify_email'
     component={VerifyEmail}
+    options={() => ({
+      headerTitle: '',
+      headerShown: false,
+    })}
+  />
+
+
+  <Stack.Screen
+    name='change_password'
+    component={ChangePassword}
+    options={() => ({
+      headerTitle: '',
+      headerShown: false,
+    })}
+  />
+
+  <Stack.Screen
+    name='register_device'
+    component={RegisterDevice}
     options={() => ({
       headerTitle: '',
       headerShown: false,
@@ -317,7 +337,14 @@ export const PrivateNavigator = () => (
       })}
     /> 
 
-    
+    <Stack.Screen
+      name='success'
+      component={Success}
+      options={{
+        headerShown: false,
+      }}
+    />
+
     <Stack.Screen
       name="support"
       component={Support}

@@ -14,6 +14,7 @@ const initialState = {
   step: '',
   bvn: '',
   token: '',
+  refreshToken: '',
   secret: '',
   balance: 0,
   isAuthenticated: false,
@@ -33,6 +34,7 @@ const UserReducer = (state = initialState, action) => {
           ...state,
           token: action.payload.token,
           secret: action.payload.secret,
+          refreshToken: action.payload.refreshToken,
         };
 
     case LOGIN_SUCCESS:

@@ -8,7 +8,7 @@ import allReducers from './src/reducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['user'],
+  whitelist: ['user', 'bill'],
 };
 const middlewares = [thunk];
 const enhancers = applyMiddleware(...middlewares);

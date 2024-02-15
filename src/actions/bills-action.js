@@ -1,31 +1,32 @@
-import { STORE_USER_ERROR_MSG, STORE_SECRETS, FETCH_USER, LOG_OUT } from "./action-types";
-import { fetchUser } from "../mutations/user";
+import { GET_AIRTIME_SERVICE_PROVIDER, GET_DISCOS, GET_INTERNET_SERVICE_PROVIDER, GET_INTERNET_PLANS } from "./action-types";
 import { store } from "../../store";
 
-export const storeSecrets = (data) => dispatch => {
-  dispatch({
-    type: STORE_SECRETS,
-    payload: data,
-  });
+
+export const storeAirtimeProviders = (providers) => {
+  store.dispatch({
+      type: GET_AIRTIME_SERVICE_PROVIDER,
+      payload: providers,
+    });
 }
 
-export const storeUserProfile = (user) => dispatch => {
-  dispatch({
-    type: FETCH_USER,
-    payload: user,
-  });
+export const storeDiscos = (providers) => {
+  store.dispatch({
+      type: GET_DISCOS,
+      payload: providers,
+    });
 }
 
-export const storeUserBalance = (balance) => dispatch => {
-  dispatch({
-    type: FETCH_USER_BALANCE,
-    payload: balance,
-  });
+export const storeISPProviders = (providers)  => {
+  store.dispatch({
+      type: GET_INTERNET_SERVICE_PROVIDER,
+      payload: providers,
+    });
 }
 
 
-export const logOut = () => dispatch => {
-  dispatch({
-    type: LOG_OUT,
-  });
+export const storePlans = (plans)  => {
+  store.dispatch({
+      type: GET_INTERNET_PLANS,
+      payload: plans,
+    });
 }

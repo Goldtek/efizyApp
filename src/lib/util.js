@@ -37,22 +37,75 @@ export const toast = (title, text, type, onPress = () => {}) => {
   });
 };
 
+const toQueryString = (obj) => {
+  Object.keys(obj).map(e => {
+    if (
+      obj[e] === null ||
+      obj[e] === undefined ||
+      String(obj[e]).trim() === ''
+    ) {
+      delete obj[e];
+    }
+  });
+  return ''.concat(
+    Object.keys(obj)
+      .map(e => {
+        return `${fixedEncodeURIComponent(e)}=${fixedEncodeURIComponent(obj[e])
+          .split('%20')
+          .join('+')}`;
+      })
+      .join('&'),
+  );
+};
 
-export const headerConfig = (
-  accessSecret,
-  accessToken,
-) => {
-  console.log('hmac returns', accessSecret, accessToken)
+function fixedEncodeURIComponent(str) {
+  return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase();
+  });
+}
+
+
+
+export const headerConfig = (options) => {
+  try {
+    const timestamp = new Date().getTime();
+    let apiSignatureString = `timestamp=${timestamp}&token=${options.accessToken}&secret=${options.accessSecret}`;
+
+
+    const signatureHash = CryptoJS.HmacSHA256(
+      apiSignatureString,
+      options.accessSecret,
+    ).toString(CryptoJS.enc.Hex);
+   
+    return {
+      headers: {
+        Signature: signatureHash,
+        Timestamp: timestamp,
+        Authorization: `Bearer ${options.accessToken}`,
+      },
+    };
+  } catch (error) {
+    console.log('error with hmac', error.message);
+  }
+};
+
+export const getUserHeaderConfig = (payLoad = null) => {
+  const accessSecret = store.getState().user.secret;
+  const accessToken = store.getState().user.token;
   try {
     const timestamp = new Date().getTime();
     let apiSignatureString = `timestamp=${timestamp}&token=${accessToken}&secret=${accessSecret}`;
 
-    // if (payLoad) {
-    //   const payloadParams = toQueryString(payLoad) + '&';
-    //   apiSignatureString = payloadParams + apiSignatureString;
-    // }
-
-    const signatureHash = CryptoJS.HmacSHA256(
+    if (payLoad) {
+      const payloadParams = toQueryString(payLoad) + '&';
+    // let payloadParams = '';
+    //   Object.keys(payLoad).forEach((item) => {
+    //     payloadParams = payloadParams + item + '=' + payLoad[item] + '&';
+    //   });
+    
+      apiSignatureString = payloadParams + apiSignatureString;
+    }
+    const signatureHash = CryptoJS.HmacSHA512(
       apiSignatureString,
       accessSecret,
     ).toString(CryptoJS.enc.Hex);
@@ -61,17 +114,12 @@ export const headerConfig = (
       headers: {
         Signature: signatureHash,
         Timestamp: timestamp,
+        Authorization: `Bearer ${accessToken}`,
       },
     };
   } catch (error) {
-    console.log('error with hmac', error);
+    console.log('error with hmac', error.message);
   }
-};
-
-export const getUserHeaderConfig = () => {
-  const accessSecret = store.getState().user.secret;
-  const accessToken = store.getState().user.token;
-   return headerConfig(accessSecret, accessToken);
 };
 
 

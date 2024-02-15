@@ -1,18 +1,43 @@
 import React, {useState} from 'react';
 import {View, Colors, Text} from 'react-native-ui-lib';
 import {TouchableOpacity, SafeAreaView} from 'react-native';
+import { useMutation } from 'react-query';
+
+import { verifyOtpRequest } from '../../../mutations/user';
 import {Button, Input, useMergedState} from '../../../common';
 import {BackArrow} from '../../../../assets/icons';
+import {toast} from '../../../lib/util';
 
-const ChangePassword = ({navigation}) => {
+const ChangePassword = ({navigation, route}) => {
+  const {email, token} = route.params;
+  const [state, setState] = useMergedState({
+      password: '',
+      password2: '',
+      processing: false
+  });
 
 
-  const handleReset = () => {
+  const handleSuccessReset = () => {
     navigation.navigate('success', {
       message: 'Congratulations, you have successfully changed your password',
       buttonLabel: 'Back to Log In',
+      type: 'auth',
     });
   };
+
+  const verifyMutation = useMutation(verifyOtpRequest, {
+    onSuccess: handleSuccessReset,
+  });
+
+  const handleReset = () => {
+    if(state.password !== state.password2) return  toast('Confirm password does not match', '', 'error');
+    const data = {
+      email: email,
+      token: token,
+      password: state.password,
+    }
+    verifyMutation.mutate(data);
+  }
 
   return (
     <SafeAreaView flex  backgroundColor={Colors.white}>
@@ -27,36 +52,36 @@ const ChangePassword = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <Text h1  blue700 bold>
-          Forgot Password
+          Forgot Password 
         </Text>
       </View>
      
       <Text body2 marginB-24 testID="forgot-pass">
         Choose your new password
       </Text>
-      <View marginB-80 testID="email">
+      <View marginB-20 testID="email">
         <Input
           label="New Password"
           placeholder="Enter your new password"
-          value={password}
+          value={state.password}
           
-          onChange={setPassword}
+          onChange={(text) => setState({password: text})}
         />
       </View>
 
-      <View marginB-80 testID="email">
+      <View marginB-50 testID="email">
         <Input
           label="Confirm Password"
-          placeholder="Enter your confirmation password"
-          value={password2}
-          onChange={setPassword2}
+          placeholder="Confirm your password"
+          value={state.password2}
+          onChange={(text) => setState({password2: text})}
         />
       </View>
 
 
       <Button
         testID="forgot-btn"
-        title="Reset Password"
+        title="Change Password"
         disabled={!email}
         onPress={handleReset}
       />

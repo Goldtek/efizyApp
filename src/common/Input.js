@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Colors, Text, View} from 'react-native-ui-lib';
+
+import Account from 'accounting'
 // import { Flag } from 'react-native-svg-flagkit';
 import RBSheet, {RBSheetProps} from 'react-native-raw-bottom-sheet';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -20,6 +22,7 @@ import {
 } from '../../assets/icons';
 import {ContactModal} from './Modal';
 import {MediumText, RegularText} from './Text';
+import { nairaFormat } from './utils';
 
 export const Input = ({
   value,
@@ -412,7 +415,7 @@ export const SelectData = ({label, placeholder, selected, data, onSelect}) => {
           style={[styles.selectBtn]}
           onPress={() => selectRef.current?.open()}>
           {selected ? (
-            <RegularText text={selected.validity} marginB-4 />
+            <RegularText text={`${selected.name.split('--')[0]} - ${selected.name.split('--')[1]} (${selected.meta.data_expiry})`} marginB-4 />
           ) : (
             <RegularText
               text={placeholder || label || ''}
@@ -424,7 +427,7 @@ export const SelectData = ({label, placeholder, selected, data, onSelect}) => {
         </TouchableOpacity>
       </View>
       <RBSheet
-        height={675}
+        height={ms(900)}
         ref={selectRef}
         closeOnDragDown={false}
         closeOnPressMask={false}
@@ -445,11 +448,14 @@ export const SelectData = ({label, placeholder, selected, data, onSelect}) => {
             <MediumText text={placeholder || label} size={18} />
           </View>
 
-          {/* <SearchInput placeholder={placeholder || label} /> */}
+          <SearchInput placeholder={placeholder || label} />
 
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={styles.selectScroll}>
+            style={styles.selectScroll}
+            contentContainerStyle={{ paddingBottom: 250 }}
+            >
+              
             {data &&
               data.map(elem => (
                 <TouchableOpacity
@@ -457,8 +463,7 @@ export const SelectData = ({label, placeholder, selected, data, onSelect}) => {
                   key={elem.id}
                   style={styles.listItem}
                   onPress={() => handleSelect(elem)}>
-                  <TextInput>{elem.validity}</TextInput>
-                  <RegularText text={nairaFormat(elem.amount)} size={11} />
+                  <RegularText text={`${elem.meta.currency} ${(elem.meta.fee)} - ${elem.name.split('--')[0]} ${elem.name.split('--')[1]} (${elem.meta.data_expiry})`} marginB-4 />
                 </TouchableOpacity>
               ))}
           </ScrollView>
@@ -516,7 +521,10 @@ const styles = StyleSheet.create({
     paddingTop: ms(20),
   },
   listItem: {
-    paddingVertical: ms(10),
+    paddingVertical: ms(15),
+    borderBottomColor: '#E2E4E8',
+    borderBottomWidth: 0.5,
+  
   },
   chevronDown: {
     position: 'absolute',

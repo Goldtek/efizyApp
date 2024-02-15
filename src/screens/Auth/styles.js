@@ -67,6 +67,7 @@ export const styles = StyleSheet.create({
     width: ms(325),
     fontFamily: 'BRFirma-SemiBold',
     height: ms(50),
+    
   },
   cellView: {
     width: ms(40),
@@ -81,6 +82,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     borderBottomWidth: 1.5,
     borderBottomColor: Colors.DarkBlue,
+    textTransform: 'none'
   },
   errorCellView: {
     width: ms(40),
@@ -93,6 +95,7 @@ export const styles = StyleSheet.create({
     color: Colors.PaRed,
     fontFamily: 'BRFirma-SemiBold',
     alignSelf: 'center',
+    textTransform: 'none'
   },
   otpErrorText: {
     marginTop: ms(10),
@@ -101,6 +104,7 @@ export const styles = StyleSheet.create({
   },
   underlineHighlighted: {
     borderColor: Colors.DarkBlue,
+    textTransform: 'none'
   },
 });
 

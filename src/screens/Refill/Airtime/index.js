@@ -18,12 +18,9 @@ const Airtime = ({navigation}) => {
   const { airtimeServiceProvider, dataPlans} = useSelector(state => state.bill);
 
   const [selectedNetwork, setSelectedNetwork] = useState({});
-  const [voucherAmount, setVoucherAmount] = useState(0);
-  const [voucher, setVoucher] = useState('');
   const [phone, setPhone] = useState('');
   const [amount, setAmount] = useState('');
-  const patriciaRate = Number(selectedNetwork?.rate);
-  const vAmount = Number(amount) * patriciaRate;
+
 
 
   const subscribe = useMutation(buyAirtime, {
@@ -33,11 +30,13 @@ const Airtime = ({navigation}) => {
   });
 
   const onContinue = () => {
-  //   {
-  //     "phoneNumber": phone,
-  //     "airtimeProviderId": "op_tHvaAHp85mTsRtEU2yqxLM",
-  //     "amount": "100"
-  // }
+    console.log('selectedNetwork', selectedNetwork, '')
+    const payload = {
+      phoneNumber: phone,
+      airtimeProviderId: selectedNetwork.id,
+      amount
+    };
+    subscribe.mutate(payload);
   };
 
 
@@ -68,11 +67,11 @@ const Airtime = ({navigation}) => {
         />
       </View>
 
-      <View marginB-30 marginT-20>
+      <View marginB-40 marginT-30>
         <AmountSelector
           selected={amount}
           onSelect={setAmount}
-          data={['500', '1000', '2000', '3000', '5000', '10000']}
+          data={['200','500', '1000', '2000', '3000', '5000', '10000']}
         />
       </View>
 
@@ -88,16 +87,17 @@ const Airtime = ({navigation}) => {
       </View>
 
 
-      <View paddingH-24 marginT-70>
+      <View paddingH-24 marginT-20>
         <Button
           buttonStyle={styles.absoluteBtn}
           title="Continue"
           bgColor={Colors.blue700}
           color={Colors.white}
           testID="continue-btn"
-          disabled={!amount || !selectedNetwork || !phone}
+          disabled={!amount || Object.keys(selectedNetwork).length === 0 || !phone}
           onPress={onContinue}
           loaderSize={'small'}
+          isLoading={subscribe.isLoading}
         />
       </View>
     </KeyboardAwareScrollView>

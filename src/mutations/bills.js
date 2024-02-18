@@ -72,6 +72,7 @@ export const verifyMeter = async (data) => {
   try {
     const header = getUserHeaderConfig(data);
     const response = await api.post('/bills/electricity/verify-meter-number', data, header);
+    //
   } catch (error) {
     toast(error?.response?.data?.message, '', 'error');
   }
@@ -81,6 +82,7 @@ export const buyElectricity = async (data) => {
   try {
     const header = getUserHeaderConfig(data);
     const response = await api.post('/bills/electricity/buy-electricity', data, header);
+    //
   } catch (error) {
     toast(error?.response?.data?.message, '', 'error');
   }

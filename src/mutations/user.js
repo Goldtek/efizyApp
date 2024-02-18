@@ -21,6 +21,7 @@ export const loginUser = async (credentials) => {
     getDiscos(response.data);
     getAirtimeProvider(response.data);
     getInternetProviders(response.data);
+   
     return response.data;
   } catch (error) {
     store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
@@ -34,6 +35,7 @@ export const fetchUser = async (data) => {
     const response = await api.get('/users/profile', header); 
     const userId = response.data.id;
     getUserBalance(data, userId);
+    getBeneficiaries(userId);
     store.dispatch(storeUserProfile(response.data));
   } catch (error) {
     store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
@@ -124,5 +126,18 @@ export function BiometricLogin(user) {
       });
   };
 }
+
+
+export const getBeneficiaries = async (id) => {
+  try {
+    const header = getUserHeaderConfig();
+    const response = await api.get(`/users/${id}/beneficiaries`, header); 
+    console.log('beneficiary', response)
+    // getUserBalance(data, userId);
+    // store.dispatch(storeUserProfile(response.data));
+  } catch (error) {
+   // store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
+  }
+};
 
 

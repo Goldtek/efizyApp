@@ -17,9 +17,7 @@ import {styles} from '../styles';
 const data = [];
 
 const DataView = ({onContinue}) => {
-  // const {airtime, data, beneficiaries} = useSelector(state => state.bill);
-  const airtime = {};
-  const beneficiaries = {};
+   const {airtime, data, beneficiaries} = useSelector(state => state.bill);
   const [dataPlans, setDataPlans] = useState();
   const [selectedPlan, setSelectedPlan] = useState();
   const [phone, setPhone] = useState('');
@@ -28,10 +26,6 @@ const DataView = ({onContinue}) => {
   const [voucherAmount, setVoucherAmount] = useState(0);
   const [serviceId, setServiceId] = useState();
 
-  // useEffect(() => {
-  //   dispatch(getAllMobileData());
-  //   getBeneficiaries('mobile-data-bill-payment');
-  // }, [dispatch]);
 
   const handleContinue = () => {
     const payload = {
@@ -52,15 +46,6 @@ const DataView = ({onContinue}) => {
           <BackHeader title="Electricity" />
         </View>
 
-        <SelectData
-          label="Service Provider"
-          placeholder="Select plan"
-          selected={selectedPlan}
-          data={dataPlans}
-          key="short_name"
-          onSelect={setSelectedPlan}
-        />
-
         <View marginB-16 marginT-10>
           <Input
             testID="service-id"
@@ -72,13 +57,24 @@ const DataView = ({onContinue}) => {
         </View>
 
         <SelectData
-          label="Meter Type"
-          placeholder="Select"
+          label="Service Provider"
+          placeholder="Select plan"
           selected={selectedPlan}
           data={dataPlans}
           key="short_name"
           onSelect={setSelectedPlan}
         />
+
+        <View marginB-16 marginT-10>
+          <SelectData
+            label="Meter Type"
+            placeholder="Select"
+            selected={selectedPlan}
+            data={dataPlans}
+            key="short_name"
+            onSelect={setSelectedPlan}
+          />
+        </View>
 
         <View marginB-70 marginT-10>
           <Input

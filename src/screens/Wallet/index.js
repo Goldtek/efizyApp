@@ -1,9 +1,10 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import {SafeAreaView, FlatList, TouchableOpacity} from 'react-native';
 import {View, Colors, Image} from 'react-native-ui-lib';
-import {RegularText, Header, FancyButton} from '../../common';
+import {RegularText, CustomStatusBar, FancyButton, useMergedState, BoldText, ms} from '../../common';
 import styles from './styles';
-import {PasswordEyeSvg} from '../../../assets/icons';
+import {PasswordEyeSvg, ClosedPasswordEyeSvg} from '../../../assets/icons';
+
 
 const WalletPane = ({
   currencyTitle,
@@ -11,124 +12,124 @@ const WalletPane = ({
   dollarValue,
   actualValue,
   symbol,
+  abv
 }) => (
   <TouchableOpacity style={styles.currencyBar}>
-    <View row>
+    <View row paddingH-10>
       <Image
         assetName={imageName}
         assetGroup="wallet"
         style={styles.icon}
         marginL-8
       />
-      <RegularText
-        text={currencyTitle}
-        style={styles.currencyTitle}
-        marginL-10
-        marginT-2
-      />
+      <View marginL-20>
+        <RegularText
+          text={currencyTitle}
+          style={styles.currencyTitle}
+        />
+       <RegularText text={`${abv}`} style={styles.subAmount} marginT-10/>
+      </View>
     </View>
 
-    <View marginR-8 style={styles.flexend}>
-      <RegularText text={`$${dollarValue}`} style={styles.listAmount} />
+    <View marginR-8  style={styles.flexend}>
       <RegularText
         text={`${symbol}${actualValue}`}
-        style={styles.subAmount}
+        style={styles.listAmount}
         marginT-5
       />
+       <RegularText text={`$${dollarValue}`} style={styles.subAmount} marginT-10/>
     </View>
   </TouchableOpacity>
 );
 
+
 const Wallet = ({navigation}) => {
+  const [state, setState] = useMergedState({hidden: true})
+  const currencies = [{ imageName:'naira', title: 'Naira', dollarValue:110, value:120000, symbol:'#', abv: 'NGN'}, 
+  { imageName:'dollar', title: 'Dollar', dollarValue:0, value:0, symbol:'$', abv: 'USD'}, 
+  { imageName:'euro', title: 'Euro', dollarValue:0, value:0, symbol:'€', abv: 'EUR'}, 
+  { imageName:'pound', title: 'Pound', dollarValue:0, value:0, symbol:'£', abv: 'GBP'},
+  { imageName:'cedis', title: 'Ghana Cedis', dollarValue:0, value:0, symbol:'GH₵', abv: 'GHC'},
+  { imageName:'ksh', title: 'Kenyan Shillings', dollarValue:0, value:0, symbol:'KSH', abv: 'KES'}]
   return (
+    <>
+     <CustomStatusBar backgroundColor={Colors.blue700} barStyle={'light-content'} />
     <SafeAreaView flex backgroundColor={Colors.white}>
-      <ScrollView flex>
-        <View paddingH-25 style={styles.cardContainer}>
+      <View flex>
+        {/* card level */}
+        <View style={styles.cardContainer}>
           <View style={styles.portfolio} paddingV-20 paddingH-20>
-            <View row>
-              <RegularText
-                text={'Total Asset ($)'}
-                style={styles.assetText}
-                marginR-10
-              />
-              <View marginT-3>
-                <PasswordEyeSvg height={20} width={20} />
+
+            <View centerH>
+              <RegularText text={state.hidden ? '***********' : `$ 200,000`} style={styles.amount}/>
+            </View>
+            <View centerH marginT-10 row>
+              <RegularText text={'Total Amount'} style={styles.assetText} />
+
+              <View marginT-3 marginL-10>
+                {!state.hidden  ?
+                <TouchableOpacity activeOpacity={0.8} onPress={() => setState({hidden: !state.hidden})}>
+                  <PasswordEyeSvg width={60} height={60} />
+                </TouchableOpacity>
+                  :
+                <TouchableOpacity activeOpacity={0.8} onPress={() => setState({hidden: !state.hidden})}>
+                  <ClosedPasswordEyeSvg width={60} height={60} />
+                </TouchableOpacity>
+                }
               </View>
+
             </View>
-            <RegularText text={2000.0} style={styles.amount} marginT-10 />
-            <View row marginT-20>
-              <RegularText text={'Rewards:'} style={styles.assetText} />
-              <RegularText text={'+2000'} style={styles.reward} marginL-5 />
+            <View row marginT-20 marginL-10>
+              <RegularText text={'Reward Points:'} style={styles.assetText} />
+              <RegularText text={state.hidden ? '****' : '500'} style={styles.reward} marginL-5 marginT-1 />
+            </View>
+            <View marginT-50 row spread marginH-10>
+              <FancyButton
+                title={'Send'}
+                assetGroup={'wallet'}
+                imageName={'send'}
+              />
+
+              <FancyButton
+                title={'Recieve'}
+                assetGroup={'wallet'}
+                imageName={'recieve'}
+              />
+              <FancyButton
+                title={'Swap'}
+                assetGroup={'wallet'}
+                imageName={'swap'}
+              />
             </View>
           </View>
-          <View marginT-20 row spread>
-            <FancyButton
-              title={'Send'}
-              assetGroup={'wallet'}
-              imageName={'send'}
-            />
 
-            <FancyButton
-              title={'Recieve'}
-              assetGroup={'wallet'}
-              imageName={'recieve'}
-            />
-            <FancyButton
-              title={'Swap'}
-              assetGroup={'wallet'}
-              imageName={'swap'}
-            />
+          {/* wallet title level */}
+          <View  style={styles.hr} paddingV-15 paddingH-20>
+            <BoldText text={'Wallets'} size={18} color={'#172b4d'} />
           </View>
-          <View marginT-20>
-            <WalletPane
-              imageName={'naira'}
-              currencyTitle={'Naira'}
-              dollarValue={110}
-              actualValue={120000}
-              symbol={'#'}
-            />
-            <WalletPane
-              imageName={'dollar'}
-              currencyTitle={'Dollars'}
-              dollarValue={0}
-              actualValue={0}
-              symbol={'$'}
-            />
-            <WalletPane
-              imageName={'euro'}
-              currencyTitle={'Euro'}
-              dollarValue={0}
-              actualValue={0}
-              symbol={'#'}
-            />
 
-            <WalletPane
-              imageName={'pound'}
-              currencyTitle={'Pounds'}
-              dollarValue={0}
-              actualValue={0}
-              symbol={'#'}
-            />
-
-            <WalletPane
-              imageName={'cedis'}
-              currencyTitle={'GHC'}
-              dollarValue={0}
-              actualValue={0}
-              symbol={'#'}
-            />
-
-            <WalletPane
-              imageName={'ksh'}
-              currencyTitle={'KSH'}
-              dollarValue={0}
-              actualValue={0}
-              symbol={'#'}
-            />
+          {/* wallet list */}
+          <View marginT-10 height={ms(400)}>
+          <FlatList
+            data={currencies}
+            renderItem={({item, index}) => (
+              <WalletPane
+                imageName={item.imageName}
+                currencyTitle={item.title}
+                dollarValue={item.dollarValue}
+                actualValue={item.value}
+                symbol={item.symbol}
+                abv={item.abv}
+              />
+            )}
+            ItemSeparatorComponent={() => <View marginL-80 style={{ height: ms(0.3), backgroundColor: Colors.blue700, width: ms(310) }}/>}
+            showsVerticalScrollIndicator={false}
+          />
           </View>
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
+    </>
   );
 };
 

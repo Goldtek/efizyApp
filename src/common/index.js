@@ -19,3 +19,4 @@ export * from './TransactionPIN';
 export * from './PaymentMethod';
 export * from './FancyButton';
 export * from './TitleInput'
+export * from './customStatusBar'

@@ -32,16 +32,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   portfolio: {
-    height: ms(140),
-    width: ms(325),
-    backgroundColor: Colors.black,
-    alignSelf: 'center',
-    borderRadius: ms(10),
-    shadowColor: 'rgba(0,0,0, .4)',
-    shadowOffset: {height: 1, width: 1},
-    shadowOpacity: 1,
-    shadowRadius: 1,
-    elevation: 2,
+    height: ms(240),
+    width: '100%',
+    backgroundColor: Colors.blue700,
   },
   assetText: {
     color: Colors.titanWhite,
@@ -49,7 +42,7 @@ const styles = StyleSheet.create({
   },
   amount: {
     color: Colors.white,
-    fontSize: 28,
+    fontSize: 32,
   },
   reward: {
     color: Colors.white,
@@ -76,17 +69,14 @@ const styles = StyleSheet.create({
     elevation: 2,
     padding: ms(5),
   },
-  currencyBar: {
-    width: ms(325),
-    height: ms(60),
-    backgroundColor: Colors.titanWhite,
 
+  currencyBar: {
+    width: '100%',
+    height: ms(60),
     borderRadius: 10,
-    marginTop: ms(10),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: ms(8),
   },
   currencyTitle: {
     color: Colors.black,
@@ -103,8 +93,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   icon: {
-    height: ms(20),
-    width: ms(20),
+    height: ms(40),
+    width: ms(40),
+  },
+ 
+  hr: {
+    borderBottomColor: Colors.bordergray,
+    borderBottomWidth: 0.5,
   },
   flexend: {alignItems: 'flex-end'},
 });

@@ -10,9 +10,9 @@ export const loadConfigurations = () => {
   });
 
   Assets.loadAssetsGroup('wallet', {
-    send: require('../../assets/images/profile/send.png'),
-    recieve: require('../../assets/images/profile/recieve.png'),
-    swap: require('../../assets/images/profile/swap.png'),
+    send: require('../../assets/images/wallet/send.png'),
+    recieve: require('../../assets/images/wallet/recieve.png'),
+    swap: require('../../assets/images/wallet/swap.png'),
     cedis: require('../../assets/images/currency/cedis.png'),
     dollar: require('../../assets/images/currency/dollar.png'),
     euro: require('../../assets/images/currency/euro.png'),

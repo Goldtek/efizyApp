@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     marginBottom: ms(8),
   },
   amountSelector: {
-    // marginTop: ms(12),
     paddingLeft: ms(24),
     height: ms(40),
   },

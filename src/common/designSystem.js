@@ -13,6 +13,9 @@ export const loadConfigurations = () => {
     send: require('../../assets/images/wallet/send.png'),
     recieve: require('../../assets/images/wallet/recieve.png'),
     swap: require('../../assets/images/wallet/swap.png'),
+    sendColored: require('../../assets/images/wallet/send2.png'),
+    recieveColored: require('../../assets/images/wallet/recieve2.png'),
+    swapColored: require('../../assets/images/wallet/swap2.png'),
     cedis: require('../../assets/images/currency/cedis.png'),
     dollar: require('../../assets/images/currency/dollar.png'),
     euro: require('../../assets/images/currency/euro.png'),
@@ -31,6 +34,7 @@ export const loadConfigurations = () => {
     data: require('../../assets/images/dashboard/data.png'),
     hotel: require('../../assets/images/dashboard/hotel.png'),
     giftcard: require('../../assets/images/dashboard/giftcard.png'),
+    user: require('../../assets/images/profile/account.png')
   });
 
   Assets.loadAssetsGroup('temporary', {

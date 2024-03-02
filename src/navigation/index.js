@@ -39,6 +39,10 @@ import Data from '../screens/Refill/Internet/DataView';
 import TV from '../screens/Refill/cable';
 import Electricity from '../screens/Refill/electricity';
 import BankTransfer from '../screens/BankTransfer';
+
+import Currency from '../screens/Wallet/currency';
+import Contact from '../screens/Wallet/contact';
+
 import {
   HomeIcon,
   ProfileIcon,
@@ -352,7 +356,25 @@ export const PrivateNavigator = () => (
         headerTitle: '',
         headerShown: false,
       })}
-    />     
+    /> 
+
+     <Stack.Screen
+      name="currency"
+      component={Currency}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    /> 
+
+    <Stack.Screen 
+      name='contact' 
+      component={Contact} 
+      options={() => ({
+        headerTitle: '',
+        headerShown: false,
+      })} 
+    />    
   </Stack.Navigator>
 );
 

@@ -18,5 +18,7 @@ export * from './Banner';
 export * from './TransactionPIN';
 export * from './PaymentMethod';
 export * from './FancyButton';
-export * from './TitleInput'
-export * from './customStatusBar'
+export * from './TitleInput';
+export * from './customStatusBar';
+export * from './TransactionItem';
+export * from './user';

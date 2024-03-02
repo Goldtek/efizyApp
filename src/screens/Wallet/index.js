@@ -12,9 +12,10 @@ const WalletPane = ({
   dollarValue,
   actualValue,
   symbol,
-  abv
+  abv,
+  navigation,
 }) => (
-  <TouchableOpacity style={styles.currencyBar}>
+  <TouchableOpacity style={styles.currencyBar} onPress={()=> navigation.navigate('currency', {currency: currencyTitle,abv, symbol, dollarValue, actualValue, imageName})}>
     <View row paddingH-10>
       <Image
         assetName={imageName}
@@ -26,16 +27,18 @@ const WalletPane = ({
         <RegularText
           text={currencyTitle}
           style={styles.currencyTitle}
+          size={14}
         />
-       <RegularText text={`${abv}`} style={styles.subAmount} marginT-10/>
+       <RegularText text={`${abv}`} style={styles.subAmount2} marginT-10 />
       </View>
     </View>
 
-    <View marginR-8  style={styles.flexend}>
+    <View marginR-20  style={styles.flexend}>
       <RegularText
         text={`${symbol}${actualValue}`}
         style={styles.listAmount}
         marginT-5
+        size={12}
       />
        <RegularText text={`$${dollarValue}`} style={styles.subAmount} marginT-10/>
     </View>
@@ -61,7 +64,7 @@ const Wallet = ({navigation}) => {
           <View style={styles.portfolio} paddingV-20 paddingH-20>
 
             <View centerH>
-              <RegularText text={state.hidden ? '***********' : `$ 200,000`} style={styles.amount}/>
+              <RegularText text={state.hidden ? '***********' : `$ 110`} style={styles.amount}/>
             </View>
             <View centerH marginT-10 row>
               <RegularText text={'Total Amount'} style={styles.assetText} />
@@ -105,7 +108,7 @@ const Wallet = ({navigation}) => {
 
           {/* wallet title level */}
           <View  style={styles.hr} paddingV-15 paddingH-20>
-            <BoldText text={'Wallets'} size={18} color={'#172b4d'} />
+            <BoldText text={'Wallet'} size={18} color={'#172b4d'} />
           </View>
 
           {/* wallet list */}
@@ -120,9 +123,10 @@ const Wallet = ({navigation}) => {
                 actualValue={item.value}
                 symbol={item.symbol}
                 abv={item.abv}
+                navigation={navigation}
               />
             )}
-            ItemSeparatorComponent={() => <View marginL-80 style={{ height: ms(0.3), backgroundColor: Colors.blue700, width: ms(310) }}/>}
+            ItemSeparatorComponent={() => <View marginL-80 style={{ height: ms(0.25), backgroundColor: Colors.grey50, width: ms(300) }}/>}
             showsVerticalScrollIndicator={false}
           />
           </View>

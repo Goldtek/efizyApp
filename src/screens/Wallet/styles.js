@@ -24,34 +24,42 @@ const styles = StyleSheet.create({
     width: '100%',
     height: ms(210),
   },
+
   title: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '400',
   },
+
   flatListContent: {
     alignItems: 'center',
   },
+
   portfolio: {
     height: ms(240),
     width: '100%',
     backgroundColor: Colors.blue700,
   },
+
   assetText: {
     color: Colors.titanWhite,
     fontSize: 14,
   },
+
   amount: {
     color: Colors.white,
     fontSize: 32,
   },
+
   reward: {
     color: Colors.white,
     fontSize: 14,
   },
+
   image: {
     height: ms(30),
     width: ms(30),
   },
+
   buttonText: {
     fontSize: 14,
   },
@@ -78,30 +86,94 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   currencyTitle: {
     color: Colors.black,
     fontSize: 16,
     fontWeight: '600',
   },
+
   listAmount: {
     color: Colors.black,
     fontSize: 14,
     fontWeight: '600',
   },
+
   subAmount: {
     color: Colors.black100,
     fontSize: 12,
   },
+
+  subAmount2: {
+    color: 'rgba(39, 74, 130, 1)',
+    fontSize: 12,
+  },
+
   icon: {
     height: ms(40),
     width: ms(40),
   },
+  icon2: {
+    height: ms(20),
+    width: ms(20),
+  },
  
   hr: {
     borderBottomColor: Colors.bordergray,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.3,
   },
-  flexend: {alignItems: 'flex-end'},
+
+  flexend: {
+    alignItems: 'flex-end'
+  },
+
+  currencyContainer: {
+    height: ms(120),
+    width: ms(340),
+    backgroundColor: Colors.white,
+    borderTopLeftRadius: ms(14),
+    borderTopRightRadius: ms(14),
+    borderBottomColor: Colors.bordergray,
+    borderBottomWidth: 0.3,
+  },
+
+  buttonContainer: {
+    width: ms(340),
+    height: ms(70),
+    backgroundColor: Colors.white,
+    borderBottomLeftRadius: ms(14),
+    borderBottomRightRadius: ms(14),
+  },
+
+  miniTitle: {
+    fontWeight: '400',
+    fontSize: 16,
+    color: 'rgba(97, 97, 97, 1)',
+  },
+
+  bigTitle: {
+    fontSize: 30,
+    fontWeight: '500',
+    color: Colors.black,
+    lineHeight: ms(36)
+  },
+
+  button: {
+    height: '100%',
+    width: ms(113),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  border: {
+    borderRightColor: Colors.bordergray,
+    borderRightWidth: 0.3,
+    borderLeftColor: Colors.bordergray,
+    borderLeftWidth: 0.3
+  },
+
+  
+
 });
 
 export default styles;

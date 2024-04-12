@@ -44,14 +44,14 @@ const Currency = ({navigation, route}) => {
                 />
                 <RegularText text='Send' color={Colors.blue700} />
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.border]}>
+            <TouchableOpacity style={[styles.button, styles.border]} onPress={() => navigation.navigate('account_details',{...route.params})}>
                 <Image
                     assetName={'recieveColored'}
                     assetGroup="wallet"
                     style={styles.icon2}
                 
                 />
-                <RegularText text='Recieve' color={Colors.blue700} />
+                <RegularText text='Account' color={Colors.blue700} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <Image

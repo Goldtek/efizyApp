@@ -51,7 +51,7 @@ const Wallet = ({navigation}) => {
   const currencies = [{ imageName:'naira', title: 'Naira', dollarValue:110, value:120000, symbol:'#', abv: 'NGN'}, 
   { imageName:'dollar', title: 'Dollar', dollarValue:0, value:0, symbol:'$', abv: 'USD'}, 
   { imageName:'euro', title: 'Euro', dollarValue:0, value:0, symbol:'€', abv: 'EUR'}, 
-  { imageName:'pound', title: 'Pound', dollarValue:0, value:0, symbol:'£', abv: 'GBP'},
+  { imageName:'pound', title: 'British Pound', dollarValue:0, value:0, symbol:'£', abv: 'GBP'},
   { imageName:'cedis', title: 'Ghana Cedis', dollarValue:0, value:0, symbol:'GH₵', abv: 'GHC'},
   { imageName:'ksh', title: 'Kenyan Shillings', dollarValue:0, value:0, symbol:'KSH', abv: 'KES'}]
   return (

@@ -42,6 +42,7 @@ import BankTransfer from '../screens/BankTransfer';
 
 import Currency from '../screens/Wallet/currency';
 import Contact from '../screens/Wallet/contact';
+import AccountDetails from '../screens/Wallet/account';
 
 import {
   HomeIcon,
@@ -374,7 +375,16 @@ export const PrivateNavigator = () => (
         headerTitle: '',
         headerShown: false,
       })} 
-    />    
+    />  
+
+    <Stack.Screen
+      name='account_details'
+      component={AccountDetails}
+      options={() => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
   </Stack.Navigator>
 );
 

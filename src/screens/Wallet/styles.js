@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    height: ms(40),
-    width: ms(40),
+    height: ms(30),
+    width: ms(30),
   },
   icon2: {
     height: ms(20),
@@ -172,7 +172,25 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0.3
   },
 
-  
+  payUser: {
+    width: ms(30), 
+    height: ms(30), 
+    borderRadius: ms(15), 
+    borderWidth: 0.5, 
+    borderColor: Colors.grey60, 
+    backgroundColor:  Colors.grey60
+  },
+
+  userContainer: {
+    borderWidth: 0.35,
+    borderColor: Colors.grey40,
+    borderRadius: ms(10)
+  },
+
+  account: {
+   // backgroundColor: Colors.white,
+    flex: 1
+  }
 
 });
 

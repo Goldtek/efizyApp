@@ -76,6 +76,7 @@ export const BackHeader = ({
   regularText,
   closeIcon,
   backAction,
+  flagIcon
 }) => {
   const navigation = useNavigation();
   return (
@@ -87,18 +88,19 @@ export const BackHeader = ({
               activeOpacity={0.6}
               style={styles.stackBtn}
               onPress={backAction ? backAction : () => navigation.goBack()}>
-              {closeIcon ? (
-                // <Icon name="close" size={24} color="#110E14" />
                 <BackArrow />
-              ) : (
-                <BackArrow />
-              )}
             </TouchableOpacity>
           </UIView>
           {regularText ? (
-            <RegularText size={18} text={title} marginB-24 />
+             <UIView row  marginL-25>
+              {flagIcon ? flagIcon : null} 
+              <RegularText size={18} text={title} marginB-24/>
+            </UIView>
           ) : (
-            <BoldText text={title} marginB-24 />
+            <UIView row  marginL-25>
+              {flagIcon ? flagIcon : null} 
+              <BoldText size={20} text={title} marginB-24 />
+            </UIView>
           )}
         </View>
       ) : (
@@ -135,8 +137,9 @@ const styles = StyleSheet.create({
   },
   stackBtn: {
     paddingHorizontal: ms(10),
-    paddingVertical: ms(10),
+    paddingVertical: ms(8),
     marginBottom: ms(18),
-    marginLeft: -14,
+    marginTop: ms(20),
+    marginLeft: ms(14),
   },
 });

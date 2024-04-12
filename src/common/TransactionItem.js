@@ -4,11 +4,23 @@ import { View, Colors, Image } from "react-native-ui-lib";
 import { ms } from "./utils";
 import { RegularText, BoldText } from "./Text";
 
-export const TransactionItem = ({}) => {
+export const TransactionItem = ({status = 'pending'}) => {
+
+    const color = (status) => {
+        let renderColor = '';
+        if(status === 'pending'){
+            renderColor = Colors.yellow10;
+        } else if(status === 'completed') {
+            renderColor  = Colors.green20;
+        } else if(status === 'rejected' || status === 'failed') {
+                renderColor = Colors.red10;
+        }
+        return renderColor;
+    }
     return (
         <TouchableOpacity style={styles.container} activeOpacity={0.7}>
             <View row spread paddingT-15 paddingH-20>
-                <RegularText text={'Pending'} color={Colors.yellow10}/>
+                <RegularText text={'Pending'} color={color}/>
                 <RegularText text={'January 18, 2024'} color={Colors.grey20} />
             </View>
             <View style={styles.hr} marginT-20 marginB-20/>

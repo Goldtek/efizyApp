@@ -4,9 +4,9 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import { BoldText, RegularText } from "./Text";
 import { ms } from "./utils";
 
-export const User = ({name, }) => {
+export const User = ({name, onPress}) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <View row>
                 <Image
                     assetName={'user'}

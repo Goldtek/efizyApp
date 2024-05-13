@@ -5,6 +5,8 @@ import {
   FETCH_USER_BALANCE,
   STORE_USER_ERROR_MSG,
   STORE_SECRETS,
+  STORECREDS,
+  GOOGLE_AUTH,
 } from '../actions/action-types';
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
   secret: '',
   balance: 0,
   isAuthenticated: false,
+  credentails: null,
+  google_auth: null,
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -55,6 +59,19 @@ const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         balance: action.payload,
+      };
+
+
+    case STORECREDS:
+      return {
+        ...state,
+        credentails: action.payload,
+      };
+
+    case GOOGLE_AUTH:
+      return {
+        ...state,
+        google_auth: action.payload,
       };
 
     case LOG_OUT:

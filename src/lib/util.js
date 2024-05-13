@@ -6,6 +6,8 @@ import CryptoJS from 'crypto-js';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import Rate, { AndroidMarket } from 'react-native-rate';
 import ZohoDeskSDK from 'react-native-zohodesk-portal-sdk';
+import queryString from 'query-string';
+
 
 import { store } from '../../store';
 import { BiometricLogin, createBiometricKeys } from '../mutations/user';
@@ -192,4 +194,11 @@ export const openSupport = () => {
   // orgid, appid, dc
  // ZohoDeskSDK.initialise("840308079", "840506952", "dc");
   ZohoDeskSDK.openPortal();
+}
+
+
+export const extractSecret = (otpUrl) => {
+  const searchParams = queryString.parseUrl(otpUrl).query;
+  const secret = searchParams.secret;
+  return secret;
 }

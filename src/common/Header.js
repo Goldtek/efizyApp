@@ -79,6 +79,7 @@ export const BackHeader = ({
   flagIcon
 }) => {
   const navigation = useNavigation();
+  const Colors = useColor();
   return (
     <>
       {stack ? (
@@ -94,7 +95,7 @@ export const BackHeader = ({
           {regularText ? (
              <UIView row  marginL-25>
               {flagIcon ? flagIcon : null} 
-              <RegularText size={18} text={title} marginB-24/>
+              <RegularText size={20} text={title} marginB-24/>
             </UIView>
           ) : (
             <UIView row  marginL-25>
@@ -113,9 +114,9 @@ export const BackHeader = ({
           </TouchableOpacity>
           {/* <BoldText text={title} /> */}
           {regularText ? (
-            <RegularText size={18} text={title} />
+            <RegularText size={22} text={title} />
           ) : (
-            <BoldText text={title} />
+            <BoldText text={title} size={22} color={Colors.blue700} />
           )}
           {/* <Text h4 black>
 

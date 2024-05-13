@@ -7,10 +7,10 @@ import { useMutation } from 'react-query';
 import { sendPasswordReqOTP } from '../../../mutations/user';
 import {RegularText, useMergedState} from '../../../common';
 import {BackArrow, Paste} from '../../../../assets/icons';
-import {styles} from '../styles';
+import styles from './changePassword/styles';
 
-const VerifyEmail = ({navigation, route}) => {
-  const {email} = route.params;
+const SecurityVerification = ({navigation, route}) => {
+  const {email, next, title} = route.params;
   const [state, setState] = useMergedState({
     otpError: '',
     otp: '',
@@ -30,7 +30,7 @@ const VerifyEmail = ({navigation, route}) => {
  const handleOtp = (otp) => {
   if(otp.length === 6) {
     setState({processing: true});
-    navigation.navigate('change_password', {email, token: otp})
+    navigation.navigate(next, {email, token: otp})
   }
  };
 
@@ -49,7 +49,7 @@ const VerifyEmail = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
         <Text h1  blue700 bold>
-          Forgot Password
+         {title}
         </Text>
       </View>
       <Text h2 bold marginB-24 testID="forgot-pass">
@@ -101,4 +101,4 @@ const VerifyEmail = ({navigation, route}) => {
  );
 };
 
-export default VerifyEmail;
+export default SecurityVerification;

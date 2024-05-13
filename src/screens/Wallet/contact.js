@@ -1,19 +1,52 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {TouchableOpacity, FlatList, StatusBar} from 'react-native';
 import {View, Colors, Image} from 'react-native-ui-lib';
 import accounting from 'accounting';
 import ReactNativePinView from "react-native-pin-view";
 import {
-  BackHeader,BoldText, User, ms, BottomSheet, RegularText
+  BackHeader,
+  BoldText, 
+  User, 
+  ms, 
+  BottomSheet, 
+  RegularText, 
+  Button, 
+  UserImage
 } from '../../common';
 import { Search } from '../../common/Search';
 import { BackArrow } from '../../../assets/icons';
 import styles from './styles';
 
 const Contact = ({navigation, route}) => {
+  const currency = route.params?.currency || '#';
   const openRef = useRef();
   const pinView = useRef(null);
-  const [pin, updatePin] = useState(true);
+  const [amount, setamount] = useState("");
+  const [showRemoveButton, setShowRemoveButton] = useState(false)
+  const [showCompletedButton, setShowCompletedButton] = useState(false)
+  const [close, setClose] = useState(false)
+
+
+  useEffect(() => {
+    if (amount.length > 0) {
+      setShowRemoveButton(true)
+    } else {
+      setShowRemoveButton(false)
+    }
+    if (amount.length === 8) {
+      setShowCompletedButton(true)
+    } else {
+      setShowCompletedButton(false)
+    }
+  }, [amount])
+
+
+  const verify = () => {
+    alert(amount)
+    setClose(true);
+  }
+
+
 
   return (
     <View flex paddingT-60 paddingH-24 backgroundColor="#fff">
@@ -24,26 +57,27 @@ const Contact = ({navigation, route}) => {
         </View>
         <Search placeholder={'Search Contact'} style={{backgroundColor: 'rgb(245, 245, 245)'}}/>
         <View marginB-20>
-            <BoldText text={'Recent Transfer'} color={Colors.grey40} size={13}/>
+            <BoldText text={'Recent Transfer'} color={Colors.blue700} size={13}/>
         </View>
 
-        <View style={{height: 300}}>
+        <View style={{height: 100}}>
           <FlatList
             data={[{}, {}, {}, {}, {}, {}]}
             renderItem={({item}) => (
-             <User onPress={() => openRef.current?.open()} />
+                <UserImage onPress={() => openRef.current?.open()} />
             )}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View height={ms(15)} />}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View width={ms(15)} />}
           />
         </View>
 
-         <View marginB-20 marginT-50>
-            <BoldText text={'All Contacts'} color={Colors.grey40} size={13}/>
+         <View marginB-20 marginT-10>
+            <BoldText text={'All Contacts'} color={Colors.blue700} size={13}/>
         </View>
-        <View style={{height: 230}}>
+        <View style={{height: 480}}>
           <FlatList
-            data={[{}, {}, {}, {}, {}, {}]}
+            data={[{}, {}, {}, {}, {}, {}, {}, {}, {}]}
             renderItem={({item}) => (
               <User onPress={() => openRef.current?.open()}/>
             )}
@@ -57,6 +91,8 @@ const Contact = ({navigation, route}) => {
       <BottomSheet
         sheetRef={openRef}
         height={ms(550)}
+        closeMask={true}
+        onClose={close}
         render={() => (
           <View marginT-10 bottom>
             <View centerH centerV marginB-10>
@@ -75,23 +111,22 @@ const Contact = ({navigation, route}) => {
                     <RegularText text={'Bank - 0079340459'} color={Colors.grey40} size={14} marginT-8/>
                 </View>
             </View>
-            <View marginT-30 centerH>
-              <BoldText text={'$ 2000.00'} size={30} />
+            <View marginT-20 centerH>
+              <BoldText text={`${currency}${amount}`} size={30} />
             </View>
             <ReactNativePinView
                 inputSize={84}
                 ref={pinView}
-                //pinLength={10}
+                pinLength={15}
                 buttonSize={80}
-                onValueChange={value => updatePin(value)}
+                activeOpacity={0.6}
+                onValueChange={value => setamount(value)}
                 buttonAreaStyle={{
                 backgroundColor: '#fff',
-               // paddingVertical: 40,
+                marginBottom: ms(60),
+                marginTop: ms(-70)
                 }}
-                inputAreaStyle={{
-                marginBottom: 10,
-               
-                }}
+                
                 inputViewEmptyStyle={{
                 backgroundColor: "transparent",
                 borderWidth: 1,
@@ -109,13 +144,15 @@ const Contact = ({navigation, route}) => {
                 if(key === "custom_right") {
                     pinView.current.clear()
                 }
-
-        
-                if (key === "three") {
-                 //   alert("You just click to 3")
-                }
+            
                 }}
+
                 customRightButton={ <BackArrow /> }
+                customLeftButton={ <Button
+                  title="Verify"
+                  style={styles.confirm}
+                  onPress={() => verify()}
+                />}
             />
         </View>
         )}

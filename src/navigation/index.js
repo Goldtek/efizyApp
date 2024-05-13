@@ -43,6 +43,16 @@ import BankTransfer from '../screens/BankTransfer';
 import Currency from '../screens/Wallet/currency';
 import Contact from '../screens/Wallet/contact';
 import AccountDetails from '../screens/Wallet/account';
+import Swap from '../screens/Wallet/swap';
+import ProfileDetail from '../screens/Profile/profile-detail';
+import Notification from '../screens/Notification';
+import ChangePass from '../screens/Profile/security/changePassword';
+import ChangeTransactionPin from '../screens/Profile/security/changePin';
+import SecurityVerification from '../screens/Profile/security/verify';
+import UpdatePassword from '../screens/Profile/security/changePassword/updatePassword';
+import DownloadAuthenticator from '../screens/Profile/security/2factor';
+import AuthStep2 from '../screens/Profile/security/2factor/step2';
+import AuthVerification from '../screens/Profile/security/2factor/otp';
 
 import {
   HomeIcon,
@@ -228,6 +238,8 @@ export const PrivateNavigator = () => (
         headerShown: false,
       })}
     />
+
+
     <Stack.Screen
       name="sell_allcard"
       component={AllSellCards}
@@ -236,6 +248,91 @@ export const PrivateNavigator = () => (
         headerShown: false,
       })}
     />
+
+
+    <Stack.Screen
+      name="profile_detail"
+      component={ProfileDetail}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+
+    <Stack.Screen
+      name="notifications"
+      component={Notification}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+
+    <Stack.Screen
+      name="changePin"
+      component={ChangeTransactionPin}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+    <Stack.Screen
+      name="changePass"
+      component={ChangePass}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+    <Stack.Screen
+      name='security_verification'
+      component={SecurityVerification}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+    <Stack.Screen
+      name='update_password'
+      component={UpdatePassword}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+    <Stack.Screen
+      name='download_auth'
+      component={DownloadAuthenticator}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+    <Stack.Screen
+      name='auth_step2'
+      component={AuthStep2}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+    <Stack.Screen
+      name='auth_verification'
+      component={AuthVerification}
+      options={props => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
 
     <Stack.Screen
       name="sell_details"
@@ -368,6 +465,8 @@ export const PrivateNavigator = () => (
       })}
     /> 
 
+
+
     <Stack.Screen 
       name='contact' 
       component={Contact} 
@@ -380,6 +479,15 @@ export const PrivateNavigator = () => (
     <Stack.Screen
       name='account_details'
       component={AccountDetails}
+      options={() => ({
+        headerTitle: '',
+        headerShown: false,
+      })}
+    />
+
+    <Stack.Screen
+      name='swap'
+      component={Swap}
       options={() => ({
         headerTitle: '',
         headerShown: false,

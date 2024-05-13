@@ -1,6 +1,6 @@
 import api from '../lib/client'
 import {toast} from '../lib/util';
-import { storeUserAuthErrorMessages, storeUserProfile, storeUserBalance } from '../actions/user';
+import { storeUserAuthErrorMessages, storeUserProfile, storeUserBalance, storeCredentails, storeAuth } from '../actions/user';
 import { store } from '../../store';
 import { getAirtimeProvider, getDiscos, getInternetProviders } from './bills';
 
@@ -21,7 +21,7 @@ export const loginUser = async (credentials) => {
     getDiscos(response.data);
     getAirtimeProvider(response.data);
     getInternetProviders(response.data);
-   
+    store.dispatch(storeCredentails(credentials));
     return response.data;
   } catch (error) {
     store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
@@ -137,6 +137,31 @@ export const getBeneficiaries = async (id) => {
     // store.dispatch(storeUserProfile(response.data));
   } catch (error) {
    // store.dispatch(storeUserAuthErrorMessages(error?.response?.data?.message));
+   return error;
+  }
+};
+
+export const setPin = async (data) => {
+  try {
+    const header = getUserHeaderConfig();
+    const response = await api.post('/users/active-pin', data, header);
+    return response.data;
+  } catch (error) {
+    toast(error?.response?.data?.message, '', 'error');
+    return error;
+  }
+};
+
+
+export const start2FA = async (data) => {
+  try {
+    const header = getUserHeaderConfig();
+    const response = await api.post('/users/setup-two-factor-auth', data, header);
+    store.dispatch(storeAuth(response.data));
+    return response.data;
+  } catch (error) {
+    toast(error?.response?.data?.message, '', 'error');
+    return error;
   }
 };
 

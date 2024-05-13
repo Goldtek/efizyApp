@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {View, Colors} from 'react-native-ui-lib';
 
-import {MediumText, Header} from '../../common';
+import {MediumText, BackHeader} from '../../common';
 import styles from './styles';
 import {Search} from '../../common/Search';
 
@@ -38,13 +38,18 @@ const Card = ({navigation}) => {
   return (
     <SafeAreaView flex backgroundColor={Colors.white}>
       <ScrollView flex>
-        <Header
-          title="Card"
-          back
-          leftClick={() => navigation.goBack()}
-          titleStyle={styles.titleStyle}
-        />
-        <Search placeholder={'Search for the transaction'} />
+        <View marginL-20>
+          <BackHeader
+            title="Card"
+            back
+            leftClick={() => navigation.goBack()}
+            // titleStyle={styles.titleStyle}
+          />
+        </View>
+        <View marginT-20>
+          <Search placeholder={'Search for the transaction'} />
+        </View>
+        
         <View marginH-10 style={styles.cardContainer}>
           <FlatList
             data={users}

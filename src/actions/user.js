@@ -1,4 +1,4 @@
-import { STORE_USER_ERROR_MSG, STORE_SECRETS, FETCH_USER, LOG_OUT } from "./action-types";
+import { STORE_USER_ERROR_MSG, STORE_SECRETS, FETCH_USER, LOG_OUT, STORECREDS, GOOGLE_AUTH } from "./action-types";
 import { fetchUser } from "../mutations/user";
 import { store } from "../../store";
 
@@ -39,6 +39,21 @@ export const storeUserBalance = (balance) => {
   return {
     type: FETCH_USER_BALANCE,
     payload: balance,
+  };
+}
+
+export const storeCredentails = (cedentials) => {
+  return {
+    type: STORECREDS,
+    payload: cedentials,
+  };
+}
+
+
+export const storeAuth = (data) => {
+  return {
+    type: GOOGLE_AUTH,
+    payload: data,
   };
 }
 

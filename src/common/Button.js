@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
-import {} from 'react-native-ui-lib';
+import {StyleSheet, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View} from 'react-native-ui-lib';
 import {useColor} from './Colors';
 import {ms} from './utils';
 
@@ -95,7 +95,9 @@ export const Button = ({
       <View style={styles.row}>
           {!isLoading ? (
             <>
-           {Icon ? <Icon style={styles.icon} /> : null}
+            <View marginT-2>
+            {Icon ? <Icon style={styles.icon} /> : null}
+           </View>
            <Text
              style={[
                buttonStyles.label,
@@ -177,6 +179,8 @@ const useStyles = () => {
       width: 15,
       height: 12,
       marginRight: 12,
+      color: colors.white,
+      verticalAlign: 'middle',
     },
   });
 };

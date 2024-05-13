@@ -53,7 +53,7 @@ const Currency = ({navigation, route}) => {
                 />
                 <RegularText text='Account' color={Colors.blue700} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('swap', { currency: currency })} >
                 <Image
                     assetName={'swapColored'}
                     assetGroup="wallet"

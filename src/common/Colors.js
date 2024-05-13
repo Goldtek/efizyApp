@@ -111,7 +111,7 @@ export const appColors = {
   avatarTextColor: '#4865C6',
   gray: '#DADADA',
   grey25: '#FAFAFA',
-  green: '#13A10E',
+  green: '#175621',
   wallet_icon: '#FFF7F2',
   apy_calculator_background: '#EAEFFF',
   sub_black: '#525151',

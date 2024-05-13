@@ -80,7 +80,7 @@ const Profile = ({navigation}) => {
             icon={<ProfileIcon color={Colors.blue700} />}
             title={'Personal Details'}
             subtitle={'Make changes to your account'}
-            // onPress={() => navigateToKYC()}
+            onPress={() => navigation.navigate('profile_detail')}
             border
             marginAdjust={true}
             showArrowIcon={true}

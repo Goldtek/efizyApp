@@ -18,13 +18,13 @@ const ExtendSecurity = ({navigation}) => {
 
   return (
     <SafeAreaView flex backgroundColor={Colors.white}>
-       <View row marginB-30 marginL-14>
+       <View row marginB-10 marginL-14 marginT-20>
           <View marginT-8 marginL-10>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => navigation.goBack()}>
-            <BackArrow />
-          </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.goBack()}>
+              <BackArrow />
+            </TouchableOpacity>
           </View>
           <Text h1 blue700 bold marginL-12>
             Security
@@ -37,8 +37,7 @@ const ExtendSecurity = ({navigation}) => {
             icon={<Lock color={Colors.blue700} />}
             title={'Change Password'}
             subtitle={'Improve security by updating your password'}
-            // onPress={() => navigateToKYC()}
-            border
+            onPress={() => navigation.navigate('changePass', {title: 'Change Password', next: 'update_password'})} 
             marginAdjust={true}
             showArrowIcon={true}
           />
@@ -46,7 +45,7 @@ const ExtendSecurity = ({navigation}) => {
             icon={<Lock color={Colors.blue700} />}
             title={'Change Transaction Pin'}
             subtitle={'Improve security by updating your transaction pin'}
-            // onPress={() => navigateToKYC()}
+            onPress={() => navigation.navigate('changePass', {title: 'Change Transaction Pin', next: 'changePin'})}
             border
             marginAdjust={true}
             showArrowIcon={true}
@@ -55,7 +54,7 @@ const ExtendSecurity = ({navigation}) => {
             icon={<ThumbPrint color={Colors.blue700} />}
             title={'Biometrics'}
             subtitle={'Enable Secure Login'}
-            // onPress={() => navigateToKYC()}
+            // onPress={() => navigation.navigate('download_auth')}
             border
             marginAdjust={true}
             showArrowIcon={false}
@@ -66,7 +65,7 @@ const ExtendSecurity = ({navigation}) => {
             icon={<Security />}
             title={'Activate 2FA'}
             subtitle={'Improve security with Google Authentication'}
-            // onPress={() => navigateToKYC()}
+            onPress={() => navigation.navigate('download_auth')}
             marginAdjust={true}
             showArrowIcon={true}
           />

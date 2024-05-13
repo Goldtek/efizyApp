@@ -3,14 +3,15 @@ import {StyleSheet} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {ms} from './utils';
 
-export const BottomSheet = ({sheetRef, height = 300, render}) => {
+export const BottomSheet = ({sheetRef, height = 300, render, closeMask = false, onClose=false}) => {
   return (
     <RBSheet
       ref={sheetRef}
       height={height}
       openDuration={300}
       closeOnDragDown={true}
-      closeOnPressMask={false}
+      closeOnPressMask={closeMask}
+      onClose={onClose}
       customStyles={{
         container: styles.container,
         draggableIcon: {

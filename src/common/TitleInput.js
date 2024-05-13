@@ -56,7 +56,7 @@ export const TitleInput = props => {
               height == undefined ? ms(50) * numberOfLines : height,
             marginTop: 10,
             marginBottom: noMarginBottom ? 0 : 30,
-            borderColor: '#E2E4E8',
+            borderColor: 'rgba(199, 199, 199, 1)',
             borderRadius: 10,
             borderWidth: 1,
             backgroundColor:

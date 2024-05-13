@@ -15,9 +15,26 @@ export const User = ({name, onPress}) => {
                 />
                 {/* <Avatar source={{uri: 'https://lh3.googleusercontent.com/-cw77lUnOvmI/AAAAAAAAAAI/AAAAAAAAAAA/WMNck32dKbc/s181-c/104220521160525129167.jpg'}} label={'IT'}/> */}
                 <View marginL-5>
-                    <BoldText text={'Clarissa Bates'} color={Colors.black} size={14}/>
-                    <RegularText text={'Bank - 0079340459'} color={Colors.grey40} size={14} marginT-8/>
+                    <BoldText text={'Clarissa Bates'} color={Colors.grey10} size={12}/>
+                    <RegularText text={'Bank - 0079340459'} color={Colors.grey40} size={12} marginT-8/>
                 </View>
+            </View>
+      </TouchableOpacity>
+    );
+}
+
+
+export const UserImage = ({name, onPress}) => {
+    return (
+        <TouchableOpacity onPress={onPress}>
+            <View marginR-15 centerV centerH>
+                <Image
+                    assetName={'user'}
+                    assetGroup="dashboard"
+                    style={styles.icon}
+                />
+                 <RegularText text={'Clarissa Bates'} color={Colors.grey10} size={12} marginT-3/>
+                 <RegularText text={'Bank - 0079340459'} color={Colors.grey40} size={10} marginT-8/>
             </View>
       </TouchableOpacity>
     );

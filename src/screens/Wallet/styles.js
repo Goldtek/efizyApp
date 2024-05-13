@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 
   portfolio: {
-    height: ms(240),
+    height: ms(220),
     width: '100%',
     backgroundColor: Colors.blue700,
   },
@@ -188,9 +188,53 @@ const styles = StyleSheet.create({
   },
 
   account: {
-   // backgroundColor: Colors.white,
-    flex: 1
-  }
+    flex: 1,
+    paddingHorizontal: ms(20)
+  },
+
+  accoutDetails: {
+    width: ms(330), 
+    height: ms(170), 
+    borderRadius: ms(20),
+    overflow: 'hidden',
+    alignSelf: 'center',
+    padding: ms(20)
+  },
+
+  shareButton: {
+    width: ms(113),
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 15,
+    fontWeight: '600',
+  },
+
+  swapContainer: {
+    height: ms(450),
+    width: ms(340),
+    backgroundColor: Colors.white,
+    borderRadius: ms(14),
+    borderColor: Colors.bordergray,
+    borderidth: 0.3,
+  },
+
+  confirmButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: ms(285)
+  },
+
+  confirm: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: ms(3),
+    paddingVertical: ms(4)
+  },
+
+  labelText: {
+    fontSize: 15,
+    fontWeight: '600',
+  },
 
 });
 

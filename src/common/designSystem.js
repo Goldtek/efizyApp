@@ -64,6 +64,12 @@ export const loadConfigurations = () => {
     logo_white: require('../../assets/images/logo/logow.png'),
   });
 
+  Assets.loadAssetsGroup('profile', {
+    password: require('../../assets/images/profile/padlock.png'),
+    pass: require('../../assets/images/profile/lock.png'),
+  });
+
+
   Typography.loadTypographies({
     h1: {
       fontFamily: 'DMSans-Regular',

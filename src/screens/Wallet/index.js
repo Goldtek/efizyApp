@@ -82,11 +82,13 @@ const Wallet = ({navigation}) => {
               </View>
 
             </View>
-            <View row marginT-20 marginL-10>
+
+            <View row marginT-50 marginL-10>
               <RegularText text={'Reward Points:'} style={styles.assetText} />
               <RegularText text={state.hidden ? '****' : '500'} style={styles.reward} marginL-5 marginT-1 />
             </View>
-            <View marginT-50 row spread marginH-10>
+
+            {/* <View marginT-50 row spread marginH-10>
               <FancyButton
                 title={'Send'}
                 assetGroup={'wallet'}
@@ -103,7 +105,7 @@ const Wallet = ({navigation}) => {
                 assetGroup={'wallet'}
                 imageName={'swap'}
               />
-            </View>
+            </View> */}
           </View>
 
           {/* wallet title level */}

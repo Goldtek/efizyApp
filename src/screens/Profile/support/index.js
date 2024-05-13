@@ -15,10 +15,9 @@ const Support = ({navigation}) => {
   const dispatch = useDispatch();
 
  
-
   return (
     <SafeAreaView flex backgroundColor={Colors.white}>
-       <View row marginB-30 marginL-14>
+       <View row marginB-10 marginL-14 marginT-20>
           <View marginT-8 marginL-10>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -37,7 +36,7 @@ const Support = ({navigation}) => {
             icon={<Lock color={Colors.blue700} />}
             title={'FAQ'}
             subtitle={'Frequently asked questins'}
-            // onPress={() => navigateToKYC()}
+            onPress={() => navigation.navigate('faq')}
             border
             marginAdjust={true}
             showArrowIcon={true}
@@ -46,7 +45,7 @@ const Support = ({navigation}) => {
             icon={<Lock color={Colors.blue700} />}
             title={'Terms and Conditions'}
             subtitle={''}
-            // onPress={() => navigateToKYC()}
+            onPress={() => navigation.navigate('terms')}
             border
             marginAdjust={true}
             showArrowIcon={true}
@@ -56,7 +55,7 @@ const Support = ({navigation}) => {
             icon={<Security />}
             title={'Privacy Policies'}
             subtitle={''}
-            // onPress={() => navigateToKYC()}
+            onPress={() => navigation.navigate('privacy')}
             marginAdjust={true}
             showArrowIcon={true}
           />
@@ -65,7 +64,7 @@ const Support = ({navigation}) => {
             icon={<Security />}
             title={'Tickets'}
             subtitle={''}
-            // onPress={() => navigateToKYC()}
+            onPress={() => navigation.navigate('tickets')}
             marginAdjust={true}
             showArrowIcon={true}
           />

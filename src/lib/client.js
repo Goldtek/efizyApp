@@ -154,8 +154,34 @@ api.interceptors.response.use(
     // Handle successful responses
     return response;
   },
-  (error) => {
-    // Handle response errors
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response.status === 401 && !originalRequest._retry) {
+      // Access token expired, try to refresh it
+      try {
+        const refreshToken = await AsyncStorage.getItem(REFRESH_TOKEN_KEY);
+
+        if (!refreshToken) {
+          // No refresh token available, handle error (e.g., logout user)
+          console.error('No refresh token found!');
+          return Promise.reject(error);
+        }
+
+        const refreshResponse = await axios.post('/users/refresh-token', { refreshToken }); // Replace with your refresh API endpoint
+        console.log('refreshResponse---', refreshResponse)
+        const newAccessToken = refreshResponse.data.token; // Replace with actual data structure
+        api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+
+        originalRequest._retry = true;
+        return api(originalRequest);
+      } catch (error) {
+        console.error('Refresh token failed:', error);
+        // Handle refresh token failure (e.g., logout user)
+        return Promise.reject(error);
+      }
+    }
+
     return Promise.reject(error);
   }
 );

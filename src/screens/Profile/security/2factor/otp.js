@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
 import {View, Colors, Text} from 'react-native-ui-lib';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { useMutation } from 'react-query';
 
-import { sendPasswordReqOTP } from '../../../mutations/user';
-import {RegularText, useMergedState} from '../../../common';
-import {BackArrow, Paste} from '../../../../assets/icons';
-import {styles} from '../styles';
+import { sendPasswordReqOTP } from '../../../../mutations/user';
+import {RegularText, useMergedState} from '../../../../common';
+import {BackArrow, Paste} from '../../../../../assets/icons';
+import styles from './styles';
 
-const VerifyEmail = ({navigation, route}) => {
-  const {email} = route.params;
+const AuthVerification = ({navigation, route}) => {
+
   const [state, setState] = useMergedState({
     otpError: '',
     otp: '',
@@ -18,7 +18,11 @@ const VerifyEmail = ({navigation, route}) => {
   });
 
   const handResendSuccess = () => {
-    // pop up toast that otp has be resent to the email address
+    navigation.navigate('success', {
+      message: 'Congratulations, you have successfully setup your two step authentication',
+      buttonLabel: 'Go to home',
+      type: 'login',
+    });
   };
 
   
@@ -30,7 +34,7 @@ const VerifyEmail = ({navigation, route}) => {
  const handleOtp = (otp) => {
   if(otp.length === 6) {
     setState({processing: true});
-    navigation.navigate('change_password', {email, token: otp})
+    navigation.navigate('', {token: otp})
   }
  };
 
@@ -49,14 +53,14 @@ const VerifyEmail = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
         <Text h1  blue700 bold>
-          Forgot Password
+          Two Step Authentication
         </Text>
       </View>
       <Text h2 bold marginB-24 testID="forgot-pass">
-        Enter OTP
+        Enter Google Auth Code
       </Text>
       <Text body2 marginB-34 testID="forgot-pass">
-        Please enter the verification code sent to your email
+        Kindly enter the code generated from your google authenticator app
       </Text>
       <OTPInputView
               style={[styles.otpView]}
@@ -83,17 +87,6 @@ const VerifyEmail = ({navigation, route}) => {
                {state.processing === true && (
                   <ActivityIndicator size={'small'} color={'#FF6600'} />
                 )}
-
-             
-              <TouchableOpacity
-                style={styles.resendCode}
-                 onPress={() => resendMail.mutate(email)}
-              >
-                <Text body2  blue700 bold>
-                    Resend OTP
-                </Text>
-               
-              </TouchableOpacity>
             </View>
     
     </View>
@@ -101,4 +94,4 @@ const VerifyEmail = ({navigation, route}) => {
  );
 };
 
-export default VerifyEmail;
+export default AuthVerification;

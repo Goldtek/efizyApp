@@ -16,7 +16,7 @@ import styles from './styles';
 const Service = ({imageName, title, onPress}) => (
   <TouchableOpacity
     activeOpacity={0.8}
-    marginB-24
+    marginB-24 
     onPress={onPress}
     centerH
     style={styles.menuWrapper}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native-ui-lib';
 import QRCode from 'react-native-qrcode-svg';
 import { useDispatch, useSelector } from 'react-redux';
-import Clipboard from '@react-native-community/clipboard';
+import Clipboard from '@react-native-clipboard/clipboard';
 import {StatusBar, SafeAreaView} from 'react-native';
 import { toast } from '../../../../lib/util';
 

@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 import CryptoJS from 'crypto-js';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import Rate, { AndroidMarket } from 'react-native-rate';
-import ZohoDeskSDK from 'react-native-zohodesk-portal-sdk';
+// import ZohoDeskSDK from 'react-native-zohodesk-portal-sdk';
 import queryString from 'query-string';
 
 
@@ -193,7 +193,7 @@ export const handleAppRating = () => {
 export const openSupport = () => {
   // orgid, appid, dc
  // ZohoDeskSDK.initialise("840308079", "840506952", "dc");
-  ZohoDeskSDK.openPortal();
+ // ZohoDeskSDK.openPortal();
 }
 
 

@@ -1833,7 +1833,7 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
-"@react-native-community/clipboard@^1.2.2", "@react-native-community/clipboard@^1.5.1":
+"@react-native-community/clipboard@^1.2.2":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@react-native-community/clipboard/-/clipboard-1.5.1.tgz#32abb3ea2eb91ee3f9c5fb1d32d5783253c9fabe"
   integrity sha512-AHAmrkLEH5UtPaDiRqoULERHh3oNv7Dgs0bTC0hO5Z2GdNokAMPT5w8ci8aMcRemcwbtdHjxChgtjbeA38GBdA==
@@ -6431,11 +6431,6 @@ react-native-vector-icons@^10.0.3:
   dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
-
-react-native-zohodesk-portal-sdk@^1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/react-native-zohodesk-portal-sdk/-/react-native-zohodesk-portal-sdk-1.2.9.tgz#5a8cbe8a01807f4c7d57005839e6136ff775729e"
-  integrity sha512-ViUQFAFuZa3I1EdozWWE+T526yV3aXgcfjZ6kKm7/pz4Pw2qeOjFaHvB6IJ2NjZmwxn3oK2x+3gcQUkdKDxlIA==
 
 react-native@0.72.3:
   version "0.72.3"

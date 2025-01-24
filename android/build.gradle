@@ -13,8 +13,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://maven.zohodl.com' }
-        maven { url "https://downloads.zohocdn.com/wmslibrary" }
+
     }
     dependencies {
         classpath("com.android.tools.build:gradle")
